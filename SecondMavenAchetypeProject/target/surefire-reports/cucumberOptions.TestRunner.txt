@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: cucumberOptions.TestRunner
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 2, Skipped: 2, Time elapsed: 1.029 s <<< FAILURE! - in cucumberOptions.TestRunner
+Search for a Product.the user is on the website 'https://www.argos.co.uk'  Time elapsed: 0.458 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.WebDriver.navigate()" because "this.driver" is null
+	at Framework.BaseClass.navigateToSite(BaseClass.java:41)
+	at stepDefinitions.SearchStepDefs.navigateToWebsite(SearchStepDefs.java:17)
+	at ✽.the user is on the website 'https://www.argos.co.uk'(file:///C:/Users/upa01/OneDrive/Documents/Automation/SecondMavenAchetypeProject/src/test/java/features/Search.feature:4)
+
+Search for a Product  Time elapsed: 0.003 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.WebDriver.navigate()" because "this.driver" is null
+	at Framework.BaseClass.navigateToSite(BaseClass.java:41)
+	at stepDefinitions.SearchStepDefs.navigateToWebsite(SearchStepDefs.java:17)
+	at ✽.the user is on the website 'https://www.argos.co.uk'(file:///C:/Users/upa01/OneDrive/Documents/Automation/SecondMavenAchetypeProject/src/test/java/features/Search.feature:4)
+
