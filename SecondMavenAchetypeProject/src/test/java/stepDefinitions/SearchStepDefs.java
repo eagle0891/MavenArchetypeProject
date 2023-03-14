@@ -32,6 +32,6 @@ public class SearchStepDefs extends BaseClass {
     @Then("^the search results should be displayed$")
     public void searchResults() {
         System.out.println("**** Search results are displayed");
-        parseSearchResults();
+        collectProducts();
     }
 }
