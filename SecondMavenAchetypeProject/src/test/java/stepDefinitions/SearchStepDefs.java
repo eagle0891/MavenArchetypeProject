@@ -4,6 +4,8 @@ import Framework.BaseClass;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,15 +19,19 @@ public class SearchStepDefs extends BaseClass {
         System.out.println("**** Navigating to site " + websiteURL);
         openBrowser(browser);
         navigateToSite(websiteURL);
+        acceptCookies();
     }
 
-    @When("^the user searches for a product$")
-    public void searchForProduct() {
+    @When("^the user searches for a product '(.*)'$")
+    public void searchForProduct(String product) {
         System.out.println("**** Searching for product");
+        enterSearchTerm(product);
+        clickEnter("#searchTerm");
     }
 
     @Then("^the search results should be displayed$")
     public void searchResults() {
         System.out.println("**** Search results are displayed");
+        parseSearchResults();
     }
 }

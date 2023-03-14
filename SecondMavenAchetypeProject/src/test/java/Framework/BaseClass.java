@@ -2,11 +2,16 @@ package Framework;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
@@ -15,8 +20,10 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 import java.util.logging.Level;
 
 public class BaseClass {
@@ -25,32 +32,6 @@ public class BaseClass {
 
     private WebDriver driver;
     protected static final Logger LOG = LoggerFactory.getLogger(BaseClass.class);
-//    public void setUp(WebDriver driver) {
-//        this.driver = driver;
-//    }
-
-//    private static final String CHROME_DRIVER = "webdriver.chrome.driver";
-//    private static final String CHROME_DRIVER_PATH = "C:\\\\Users\\\\upa01\\\\OneDrive\\\\Documents\\\\Automation\\\\SecondMavenAchetypeProject\\\\tools\\\\chromedriver1.exe";
-//    private static final String FIREFOX_DRIVER = "webdriver.firefox.driver";
-//    private static final String FIREFOX_DRIVER_PATH = "C:\\Users\\upa01\\OneDrive\\Documents\\Automation\\SecondMavenAchetypeProject\\tools\\geckodriver.exe";
-
-    public void setupWebdriver() {
-//        WebDriverManager.chromedriver().driverVersion("92.0.4515.43").setup();
-
-//        driver = new ChromeDriver();
-//        driver.manage().window().maximize();
-
-//        WebDriverManager.chromedriver().setup();
-//        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--remote-allow-origins=*");
-//        DesiredCapabilities cp=new DesiredCapabilities();
-//        cp.setCapability(ChromeOptions.CAPABILITY, options);
-//        options.merge(cp);
-//        driver = new ChromeDriver(options);
-
-        WebDriverManager.firefoxdriver().setup();
-
-    }
 
     public void openBrowser(String browser) throws MalformedURLException {
         switch (browser) {
@@ -66,15 +47,18 @@ public class BaseClass {
             case "firefox" -> {
                 WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
+//                FirefoxOptions options = new FirefoxOptions();
+//                options.setBinary(new FirefoxBinary(new File("C:\\Users\\uagwo\\AppData\\Local\\Mozilla Firefox\\firefox.exe")));
+//                WebDriver driver = new FirefoxDriver(options);
             }
             case "internet explorer" -> {
                 WebDriverManager.iedriver().setup();
                 driver = new InternetExplorerDriver();
             }
-//            case "edge" -> {
-//                WebDriverManager.edgedriver().setup();
-//                driver = new EdgeDriver();
-//            }
+            case "edge" -> {
+                WebDriverManager.edgedriver().setup();
+                driver = new EdgeDriver();
+            }
             case "remote" -> {
                 //set up remote test envs
                 DesiredCapabilities caps = new DesiredCapabilities();
@@ -113,8 +97,31 @@ public class BaseClass {
 //            return chromeOptions;
 //        }
 
-    public void navigateToSite (String url){
-        driver.navigate().to(url);
+    public void navigateToSite (String string){
+        driver.navigate().to(string);
+    }
+
+    public void acceptCookies() {
+        driver.findElement(By.cssSelector(".consent_prompt_footer #consent_prompt_submit")).click();
+    }
+
+    public void enterSearchTerm(String string){
+        driver.findElement(By.cssSelector("#searchTerm")).sendKeys(string, Keys.RETURN);
+    }
+
+    public void clickEnter(String string) {
+        driver.findElement(By.cssSelector(string)).sendKeys(Keys.RETURN);
+    }
+
+    public void parseSearchResults(){
+        WebElement resultsGrid = driver.findElement(By.cssSelector(".styles__ProductList-sc-1rzb1sn-1"));
+        List<WebElement> products = resultsGrid.findElements(By.cssSelector("ProductCardstyles__Wrapper-h52kot-1"));
+        System.out.println("The number of products is: " + products.size());
+        for (WebElement product : products ) {
+            WebElement chooseButton = driver.findElement(By.cssSelector(".ProductCardstyles__ButtonContainer-h52kot-8 .Buttonstyles__Button-sc-42scm2-2"));
+            String chooseButtonText = chooseButton.getText();
+            System.out.println(chooseButtonText);
+        }
     }
 
     @After
