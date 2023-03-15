@@ -26,12 +26,11 @@ public class SearchStepDefs extends BaseClass {
     public void searchForProduct(String product) {
         System.out.println("**** Searching for product");
         enterSearchTerm(product);
-        clickEnter("#searchTerm");
     }
 
     @Then("^the search results should be displayed$")
     public void searchResults() {
         System.out.println("**** Search results are displayed");
-        collectProducts();
+        collectProductsTwo();
     }
 }

@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
@@ -90,11 +91,11 @@ public class BaseClass extends WaitHelper {
     }
 
     public void acceptCookies() {
-        driver.findElement(By.cssSelector(".consent_prompt_footer #consent_prompt_submit")).click();
+        driver.findElement(By.cssSelector("#sp-cc-accept")).click(); //.consent_prompt_footer #consent_prompt_submit
     }
 
     public void enterSearchTerm(String string){
-        driver.findElement(By.cssSelector("#searchTerm")).sendKeys(string, Keys.RETURN);
+        driver.findElement(By.cssSelector("#twotabsearchtextbox")).sendKeys(string, Keys.RETURN); //#searchTerm
     }
     public void collectProducts(){
         isElementDisplayed(By.cssSelector(".styles__ProductList-sc-1rzb1sn-1 .styles__LazyHydrateCard-sc-1rzb1sn-0 .ProductCardstyles__Title-h52kot-12"));
@@ -110,6 +111,22 @@ public class BaseClass extends WaitHelper {
             System.out.println(linkTextUrl);
             System.out.println(buttonText);
         }
+    }
+
+    public void collectProductsTwo(){
+        isElementDisplayed(By.cssSelector(".s-result-list"));
+//        List<WebElement> products = driver.findElements(By.cssSelector(".styles__ProductList-sc-1rzb1sn-1 .styles__LazyHydrateCard-sc-1rzb1sn-0"));
+//        System.out.println("Number of products is: " + products.size());
+//        for (WebElement product : products) {
+//            WebElement link = product.findElement(By.cssSelector(".ProductCardstyles__Title-h52kot-12"));
+//            WebElement button = product.findElement(By.cssSelector(".Buttonstyles__Button-sc-42scm2-2"));
+//
+//            String linkTextUrl = link.getAttribute("href");
+//            String buttonText = button.getText();
+//
+//            System.out.println(linkTextUrl);
+//            System.out.println(buttonText);
+//        }
     }
 
     @After
