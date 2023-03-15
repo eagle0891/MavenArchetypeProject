@@ -95,6 +95,7 @@ public class BaseClass extends WaitHelper {
     }
 
     public void enterSearchTerm(String string){
+        // testing comment and commit
         driver.findElement(By.cssSelector("#searchTerm")).sendKeys(string, Keys.RETURN);
     }
 
