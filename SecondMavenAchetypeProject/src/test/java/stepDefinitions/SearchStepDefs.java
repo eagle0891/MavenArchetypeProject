@@ -1,13 +1,11 @@
 package stepDefinitions;
 
-import Framework.BaseClass;
-import Framework.ReadFrom;
+import Helpers.BaseClass;
+import Helpers.ReadFrom;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +39,6 @@ public class SearchStepDefs extends BaseClass {
 
     @Test
     public void simplePropertiesFileTest(){
-        assertEquals("informationFromPropertiesFile",ReadFrom.propertiesFile("data","test"));
+        assertEquals("cssFromPropertiesFile",ReadFrom.propertiesFile("css","test"));
     }
 }

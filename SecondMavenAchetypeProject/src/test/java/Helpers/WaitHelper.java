@@ -1,4 +1,4 @@
-package Framework;
+package Helpers;
 
 import lombok.Getter;
 import org.openqa.selenium.*;
