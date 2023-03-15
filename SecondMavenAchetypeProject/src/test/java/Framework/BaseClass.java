@@ -142,7 +142,7 @@ public class BaseClass extends WaitHelper {
         }
     }
 
-    @After
+    //@After
     public void quit (){
         driver.quit();
     }
