@@ -11,6 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -96,6 +97,12 @@ public class BaseClass extends WaitHelper {
     public void enterSearchTerm(String string){
         driver.findElement(By.cssSelector("#searchTerm")).sendKeys(string, Keys.RETURN);
     }
+
+    public void clickEnter(String selector){
+        driver.findElement(By.cssSelector(selector)).click();
+    }
+
+
     public void collectProducts(){
         isElementDisplayed(By.cssSelector(".styles__ProductList-sc-1rzb1sn-1 .styles__LazyHydrateCard-sc-1rzb1sn-0 .ProductCardstyles__Title-h52kot-12"));
         List<WebElement> products = driver.findElements(By.cssSelector(".styles__ProductList-sc-1rzb1sn-1 .styles__LazyHydrateCard-sc-1rzb1sn-0"));
@@ -109,6 +116,28 @@ public class BaseClass extends WaitHelper {
 
             System.out.println(linkTextUrl);
             System.out.println(buttonText);
+        }
+    }
+
+    // TO BE IMPLEMENTED TOGETHER
+    public static void customerAction(String action,By by, String... requiredText) throws Exception {
+        switch (action) {
+            case "click" -> {
+
+            }
+            case "enterText" -> {
+            }
+
+            case "SelectFromDropDown" -> {
+                //Select select = new Select(find(by));
+                //select.selectByVisibleText(requiredText[0]);
+            }
+            case "getText" -> {
+                //find(by).getText();
+            }
+            case "getValue" -> {
+                //find(by).getAttribute("value");
+            }
         }
     }
 
