@@ -124,9 +124,10 @@ public class BaseClass extends WaitHelper {
 
     private static final By SEARCH_RESULTS_LIST = By.cssSelector(ReadFrom.propertiesFile("css", "searchResultsList"));
     private static final By SEARCH_RESULT_ITEM = By.cssSelector(ReadFrom.propertiesFile("css", "searchResultItem"));
-    public void collectProductsTwo() {
+    public void collectProductsTwo() throws InterruptedException {
         String css = driver.findElement(SEARCH_RESULTS_LIST).getAttribute("class");
         System.out.println("Search result CSS is: " + css);
+        waitForElementToDisplay( driver.findElement(SEARCH_RESULTS_LIST), 10);
         WebElement searchResultsList = driver.findElement(SEARCH_RESULTS_LIST);
         //(driver.findElement(SEARCH_RESULT_ITEM).getAttribute("data-asin") != null)
         List<WebElement> products = searchResultsList.findElements(SEARCH_RESULT_ITEM);

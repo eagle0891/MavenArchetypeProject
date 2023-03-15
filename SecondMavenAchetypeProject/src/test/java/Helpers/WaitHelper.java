@@ -2,6 +2,7 @@ package Helpers;
 
 import lombok.Getter;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -58,5 +59,22 @@ public class WaitHelper {
                         "\n EXPECTED ELEMENT NOT DISPLAYED!! " +
                         "\n Element NOT Found : " + bySelector +"\n",
                 expectedElementDisplayed);
+    }
+
+    public static boolean waitForElementToDisplay(WebElement element, int timeOutInSeconds) throws InterruptedException {
+        boolean isDisplayed = false;
+        for(int i = 0; i < timeOutInSeconds; i++) {
+            try {
+                if (element.isDisplayed()) {
+                    System.out.println(element.toString() + " is visible");
+                    isDisplayed = true;
+                    break;
+                }
+            } catch (NoSuchElementException exception) {
+                System.out.println(element.toString() + " is not visible");
+                Thread.sleep(10);
+            }
+        }
+        return isDisplayed;
     }
 }

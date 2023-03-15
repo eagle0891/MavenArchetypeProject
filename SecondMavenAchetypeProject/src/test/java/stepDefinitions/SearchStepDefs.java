@@ -32,7 +32,7 @@ public class SearchStepDefs extends BaseClass {
     }
 
     @Then("^the search results should be displayed$")
-    public void searchResults() {
+    public void searchResults() throws InterruptedException {
         System.out.println("**** Search results are displayed");
         collectProductsTwo();
     }
