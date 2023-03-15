@@ -8,7 +8,7 @@ public class ReadFrom {
     public static String propertiesFile(String propertiesType, String data) throws NullPointerException{
         Properties prop = new Properties();
         try {
-            prop.load(new FileInputStream("src/test/java/Framework/" + propertiesType +".properties"));
+            prop.load(new FileInputStream("src/test/java/properties/" + propertiesType +".properties"));
         } catch (Exception e){
             System.out.println("Selected properties file was not found");
         }   if (prop.getProperty(data) == null) {
