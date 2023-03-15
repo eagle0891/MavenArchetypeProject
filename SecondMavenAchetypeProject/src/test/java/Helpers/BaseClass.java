@@ -2,6 +2,7 @@ package Helpers;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
+import org.junit.After;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -123,27 +124,29 @@ public class BaseClass extends WaitHelper {
 
     private static final By SEARCH_RESULTS_LIST = By.cssSelector(ReadFrom.propertiesFile("css", "searchResultsList"));
     private static final By SEARCH_RESULT_ITEM = By.cssSelector(ReadFrom.propertiesFile("css", "searchResultItem"));
-    public void collectProductsTwo(){
+    public void collectProductsTwo() {
         String css = driver.findElement(SEARCH_RESULTS_LIST).getAttribute("class");
         System.out.println("Search result CSS is: " + css);
         WebElement searchResultsList = driver.findElement(SEARCH_RESULTS_LIST);
-//(driver.findElement(SEARCH_RESULT_ITEM).getAttribute("data-asin") != null)
+        //(driver.findElement(SEARCH_RESULT_ITEM).getAttribute("data-asin") != null)
         List<WebElement> products = searchResultsList.findElements(SEARCH_RESULT_ITEM);
         System.out.println("Number of products is: " + products.size());
         for (WebElement product : products) {
-            String productName = product.findElement(By.cssSelector("span.a-text-normal")).getText();
-            String productWholePricePart = product.findElement(By.cssSelector(".a-price-whole")).getText();
-            String productDecimalPricePart = product.findElement(By.cssSelector(".a-price-fraction")).getText();
-            String productBrandName = product.findElement(By.cssSelector("h5.s-line-clamp-1 .a-size-base-plus.a-color-base")).getText();
-            System.out.println("Brand is: " + productBrandName);
-            System.out.println("Product title is: " + productName);
-            System.out.println("Product Price is: £" + productWholePricePart + "." + productDecimalPricePart);
+            if (product.findElement(By.cssSelector(".a-price-whole")).getText().length()>1) {
+                String productName = product.findElement(By.cssSelector("span.a-text-normal")).getText();
+                String productWholePricePart = product.findElement(By.cssSelector(".a-price-whole")).getText();
+                String productDecimalPricePart = product.findElement(By.cssSelector(".a-price-fraction")).getText();
+//                String productBrandName = product.findElement(By.cssSelector("h5.s-line-clamp-1 .a-size-base-plus.a-color-base")).getText();
+//                System.out.println("Brand is: " + productBrandName);
+                System.out.println("Product title is: " + productName);
+                System.out.println("Product Price is: £" + productWholePricePart + "." + productDecimalPricePart);
+            }
+//            throw new NoSuchElementException("Element does not contain a product");
         }
-        throw new NoSuchElementException("Element does not contain a product");
     }
 
 //    @After
-    // TO BE IMPLEMENTED TOGETHER
+//     //TO BE IMPLEMENTED TOGETHER
 //    public void customerAction(String action,By by, String... requiredText) throws Exception {
 //        switch (action) {
 //            case "click" -> {
