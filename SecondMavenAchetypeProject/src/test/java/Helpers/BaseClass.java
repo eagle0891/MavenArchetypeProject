@@ -1,5 +1,6 @@
 package Helpers;
 
+import Models.Product;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
 import org.junit.After;
@@ -17,6 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
@@ -34,6 +36,7 @@ public class BaseClass extends WaitHelper {
     protected WebDriverWait wait;
     @Getter
     protected WebDriver webDriver;
+    public Product product;
 
 //    private WaitHelper waitHelper;
     public void openBrowser(String browser) throws MalformedURLException {
@@ -144,6 +147,36 @@ public class BaseClass extends WaitHelper {
             }
 //            throw new NoSuchElementException("Element does not contain a product");
         }
+    }
+
+    public ArrayList<Product> collectProductsThree() throws InterruptedException {
+        product.ProductCollection = new ArrayList<>();
+        String css = driver.findElement(SEARCH_RESULTS_LIST).getAttribute("class");
+        System.out.println("Search result CSS is: " + css);
+        waitForElementToDisplay(driver.findElement(SEARCH_RESULTS_LIST), 10);
+        WebElement searchResultsList = driver.findElement(SEARCH_RESULTS_LIST);
+        List<WebElement> products = searchResultsList.findElements(SEARCH_RESULT_ITEM);
+        System.out.println("Number of products is: " + products.size());
+        for (WebElement product : products) {
+            try {
+                String productName = product.findElement(By.cssSelector("span.a-text-normal")).getText();
+                String productWholePricePart = product.findElement(By.cssSelector(".a-price-whole")).getText();
+                String productDecimalPricePart = product.findElement(By.cssSelector(".a-price-fraction")).getText();
+                // String productBrandName = product.findElement(By.cssSelector("h5.s-line-clamp-1 .a-size-base-plus.a-color-base")).getText();
+                // System.out.println("Brand is: " + productBrandName);
+                System.out.println("Product title is: " + productName);
+                System.out.println("Product Price is: £" + productWholePricePart + "." + productDecimalPricePart);
+                boolean isSamsung = productName.contains("Samsung");
+                WebElement samsungSelection = null;
+                if (isSamsung) {
+                    samsungSelection = product.findElement(By.cssSelector("span.a-text-normal"));
+                }
+                this.product.ProductCollection.add(new Product(productName, productWholePricePart, productDecimalPricePart, isSamsung, product, samsungSelection));
+            } catch (NoSuchElementException e) {
+                LOG.info("**** Element does not contain a product ****");
+            }
+        }
+        return product.ProductCollection;
     }
 
 //    @After
