@@ -197,7 +197,7 @@ protected WebDriver driver;
 //                        waitForExpectedElement(By.cssSelector("span.a-text-normal"), Duration.ofSeconds(50)).click();
 //                        visibilityOfElementLocated(By.cssSelector("span.a-text-normal"));
                         Thread.sleep(3000);
-                        driver.findElement(By.cssSelector("span.a-text-normal")).click();
+                        product.findElement(By.cssSelector(".s-image")).click();
                         LOG.info("** SAMSUNG PDP SHOULD BE DISPLAYED **");
                         break outer;
                     }
@@ -210,7 +210,7 @@ protected WebDriver driver;
 //                        waitForExpectedElement(By.cssSelector("span.a-text-normal"), Duration.ofSeconds(50)).click();
 //                        visibilityOfElementLocated(By.cssSelector("span.a-text-normal"));
                         Thread.sleep(3000);
-                        driver.findElement(By.cssSelector("span.a-text-normal")).click();
+                        product.findElement(By.cssSelector(".s-image")).click();
                         LOG.info("** CASIO PDP SHOULD BE DISPLAYED **");
                         break outer;
                     }

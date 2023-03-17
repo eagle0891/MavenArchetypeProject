@@ -34,6 +34,7 @@ public class Product extends BaseClass {
         this.samsungSelection = samsungSelection;
         this.casioSelection = casioSelection;
         this.isCasio = isCasio;
+        //add the image selector here somewhere as a webelement
     }
 
 //    public void addToCart(){
