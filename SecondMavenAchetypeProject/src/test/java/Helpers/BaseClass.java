@@ -201,6 +201,7 @@ protected WebDriver driver;
                         LOG.info("** SAMSUNG PDP SHOULD BE DISPLAYED **");
                         break outer;
                     }
+                    break;
                 case "casio":
                     if (product.isCasio()){
                         System.out.println("*** Casio switch statement being executed ***");
@@ -213,6 +214,7 @@ protected WebDriver driver;
                         LOG.info("** CASIO PDP SHOULD BE DISPLAYED **");
                         break outer;
                     }
+                    break;
                 default:
                     LOG.info("ERROR : Product type not recognised, please select a valid product type.");
             }
