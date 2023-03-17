@@ -24,8 +24,9 @@ public class Product extends BaseClass {
     WebElement productWebElement;
     WebElement samsungSelection;
     WebElement casioSelection;
+    WebElement productImageLink;
 
-    public Product(String productName, String productWholePricePart, String productDecimalPricePart, boolean isSamsung, WebElement product, WebElement samsungSelection, boolean isCasio, WebElement casioSelection) {
+    public Product(String productName, String productWholePricePart, String productDecimalPricePart, boolean isSamsung, WebElement product, WebElement samsungSelection, boolean isCasio, WebElement casioSelection, WebElement productImageLink) {
         this.name = productName;
         this.wholePrice = productWholePricePart;
         this.decimalPricePart = productDecimalPricePart;
@@ -34,6 +35,7 @@ public class Product extends BaseClass {
         this.samsungSelection = samsungSelection;
         this.casioSelection = casioSelection;
         this.isCasio = isCasio;
+        this.productImageLink = productImageLink;
         //add the image selector here somewhere as a webelement
     }
 

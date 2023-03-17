@@ -163,6 +163,7 @@ protected WebDriver driver;
                 String productName = product.findElement(By.cssSelector("span.a-text-normal")).getText();
                 String productWholePricePart = product.findElement(By.cssSelector(".a-price-whole")).getText();
                 String productDecimalPricePart = product.findElement(By.cssSelector(".a-price-fraction")).getText();
+                WebElement produtImageLink = product.findElement(By.cssSelector(".s-image"));
                 // String productBrandName = product.findElement(By.cssSelector("h5.s-line-clamp-1 .a-size-base-plus.a-color-base")).getText();
                 // System.out.println("Brand is: " + productBrandName);
                 System.out.println("Product title is: " + productName);
@@ -177,7 +178,7 @@ protected WebDriver driver;
                 if (isCasio) {
                     casioSelection = product.findElement(By.cssSelector("span.a-text-normal"));
                 }
-                Product.ProductCollection.add(new Product(productName, productWholePricePart, productDecimalPricePart, isSamsung, product, samsungSelection, isCasio, casioSelection));
+                Product.ProductCollection.add(new Product(productName, productWholePricePart, productDecimalPricePart, isSamsung, product, samsungSelection, isCasio, casioSelection, produtImageLink));
             } catch (NoSuchElementException e) {
                 LOG.info("**** Element does not contain a product ****");
             }
@@ -197,7 +198,7 @@ protected WebDriver driver;
 //                        waitForExpectedElement(By.cssSelector("span.a-text-normal"), Duration.ofSeconds(50)).click();
 //                        visibilityOfElementLocated(By.cssSelector("span.a-text-normal"));
                         Thread.sleep(3000);
-                        product.findElement(By.cssSelector(".s-image")).click();
+                        product.getProductImageLink().click();
                         LOG.info("** SAMSUNG PDP SHOULD BE DISPLAYED **");
                         break outer;
                     }
@@ -210,7 +211,7 @@ protected WebDriver driver;
 //                        waitForExpectedElement(By.cssSelector("span.a-text-normal"), Duration.ofSeconds(50)).click();
 //                        visibilityOfElementLocated(By.cssSelector("span.a-text-normal"));
                         Thread.sleep(3000);
-                        product.findElement(By.cssSelector(".s-image")).click();
+                        product.getProductImageLink().click();
                         LOG.info("** CASIO PDP SHOULD BE DISPLAYED **");
                         break outer;
                     }
