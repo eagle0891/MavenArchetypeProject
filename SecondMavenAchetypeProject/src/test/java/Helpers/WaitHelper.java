@@ -34,7 +34,7 @@ public class WaitHelper {
         }
     }
 
-    private ExpectedCondition<WebElement> visibilityOfElementLocated(final By by) throws NoSuchElementException {
+    ExpectedCondition<WebElement> visibilityOfElementLocated(final By by) throws NoSuchElementException {
         return driver -> {
             try {
                 Thread.sleep(500);

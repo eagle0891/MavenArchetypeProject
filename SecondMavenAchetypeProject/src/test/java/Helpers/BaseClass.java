@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,12 +31,12 @@ public class BaseClass extends WaitHelper {
 //    public BaseClass (WaitHelper waitHelper){
 //        this.waitHelper = waitHelper;
 //    }
-    private WebDriver driver;
+protected WebDriver driver;
     protected static final Logger LOG = LoggerFactory.getLogger(BaseClass.class);
     @Getter
     protected WebDriverWait wait;
-    @Getter
-    protected WebDriver webDriver;
+//    @Getter
+//    protected WebDriver webDriver;
     public Product product;
 
 //    private WaitHelper waitHelper;
@@ -150,7 +151,7 @@ public class BaseClass extends WaitHelper {
     }
 
     public ArrayList<Product> collectProductsThree() throws InterruptedException {
-        product.ProductCollection = new ArrayList<>();
+        Product.ProductCollection = new ArrayList<>();
         String css = driver.findElement(SEARCH_RESULTS_LIST).getAttribute("class");
         System.out.println("Search result CSS is: " + css);
         waitForElementToDisplay(driver.findElement(SEARCH_RESULTS_LIST), 10);
@@ -171,12 +172,55 @@ public class BaseClass extends WaitHelper {
                 if (isSamsung) {
                     samsungSelection = product.findElement(By.cssSelector("span.a-text-normal"));
                 }
-                this.product.ProductCollection.add(new Product(productName, productWholePricePart, productDecimalPricePart, isSamsung, product, samsungSelection));
+                boolean isCasio = productName.contains("Casio");
+                WebElement casioSelection = null;
+                if (isCasio) {
+                    casioSelection = product.findElement(By.cssSelector("span.a-text-normal"));
+                }
+                Product.ProductCollection.add(new Product(productName, productWholePricePart, productDecimalPricePart, isSamsung, product, samsungSelection, isCasio, casioSelection));
             } catch (NoSuchElementException e) {
                 LOG.info("**** Element does not contain a product ****");
             }
         }
-        return product.ProductCollection;
+        return Product.ProductCollection;
+    }
+
+    public void findProductType(String productType) throws InterruptedException {
+        //clearProductCollectionIfPopulated();
+        outer: for (Product product : Product.ProductCollection) {
+            switch(productType){
+                case "samsung":
+                    if (product.isSamsung()){
+                        System.out.println("*** Samsung switch statement being executed ***");
+                        LOG.info("** SAMSUNG PRODUCT FOUND **");
+                        product.display();
+//                        waitForExpectedElement(By.cssSelector("span.a-text-normal"), Duration.ofSeconds(50)).click();
+//                        visibilityOfElementLocated(By.cssSelector("span.a-text-normal"));
+                        Thread.sleep(3000);
+                        driver.findElement(By.cssSelector("span.a-text-normal")).click();
+                        LOG.info("** SAMSUNG PDP SHOULD BE DISPLAYED **");
+                        break outer;
+                    }
+                case "casio":
+                    if (product.isCasio()){
+                        System.out.println("*** Casio switch statement being executed ***");
+                        LOG.info("** CASIO PRODUCT FOUND **");
+                        product.display();
+//                        waitForExpectedElement(By.cssSelector("span.a-text-normal"), Duration.ofSeconds(50)).click();
+//                        visibilityOfElementLocated(By.cssSelector("span.a-text-normal"));
+                        Thread.sleep(3000);
+                        driver.findElement(By.cssSelector("span.a-text-normal")).click();
+                        LOG.info("** CASIO PDP SHOULD BE DISPLAYED **");
+                        break outer;
+                    }
+                default:
+                    LOG.info("ERROR : Product type not recognised, please select a valid product type.");
+            }
+        }
+    }
+
+    public void confirmPdpPageIsDisplayed(){
+        assertTrue(driver.findElement(By.cssSelector("#breadcrumb-back-link")).isDisplayed());
     }
 
 //    @After

@@ -16,20 +16,24 @@ import java.util.ArrayList;
 public class Product extends BaseClass {
     public static ArrayList<Product> ProductCollection;
     boolean isSamsung;
+    boolean isCasio;
     String name;
     String description;
     String wholePrice;
     String decimalPricePart;
     WebElement productWebElement;
     WebElement samsungSelection;
+    WebElement casioSelection;
 
-    public Product(String productName, String productWholePricePart, String productDecimalPricePart, boolean isSamsung, WebElement product, WebElement samsungSelection) {
+    public Product(String productName, String productWholePricePart, String productDecimalPricePart, boolean isSamsung, WebElement product, WebElement samsungSelection, boolean isCasio, WebElement casioSelection) {
         this.name = productName;
         this.wholePrice = productWholePricePart;
         this.decimalPricePart = productDecimalPricePart;
         this.isSamsung = isSamsung;
         this.productWebElement = product;
         this.samsungSelection = samsungSelection;
+        this.casioSelection = casioSelection;
+        this.isCasio = isCasio;
     }
 
 //    public void addToCart(){

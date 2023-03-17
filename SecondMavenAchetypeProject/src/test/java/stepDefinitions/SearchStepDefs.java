@@ -41,4 +41,15 @@ public class SearchStepDefs extends BaseClass {
     public void simplePropertiesFileTest(){
         assertEquals("cssFromPropertiesFile",ReadFrom.propertiesFile("css","test"));
     }
+
+    @When("^I click on the product '(.*)'$")
+    public void selectTheProduct(String productType) throws InterruptedException {
+        System.out.println("Product type provided by the test is: " + productType);
+        findProductType(productType);
+    }
+
+    @Then("^the PDP should be displayed$")
+    public void pdpShouldBeDisplayed() {
+        confirmPdpPageIsDisplayed();
+    }
 }
