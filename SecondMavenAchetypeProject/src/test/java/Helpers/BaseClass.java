@@ -22,6 +22,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+import static Helpers.ActionTypesEnum.click;
 import static org.junit.Assert.assertTrue;
 
 public class BaseClass extends WaitHelper {
@@ -196,8 +197,7 @@ protected WebDriver driver;
                         LOG.info("** SAMSUNG PRODUCT FOUND **");
                         product.display();
                         waitForElementToBeClickable(driver, product.getProductImageLink(), Duration.ofSeconds(10));
-//                        Thread.sleep(3000);
-//                        product.getProductImageLink().click();
+                        customerAction(click, product.getProductImageLink());
                         LOG.info("** SAMSUNG PDP SHOULD BE DISPLAYED **");
                         break outer;
                     }
@@ -208,9 +208,7 @@ protected WebDriver driver;
                         LOG.info("** CASIO PRODUCT FOUND **");
                         product.display();
                         waitForElementToBeClickable(driver, product.getProductImageLink(), Duration.ofSeconds(10));
-//                        Thread.sleep(3000);
-//                        product.getProductImageLink().click();
-                        customerAction("click", product.getProductImageLink());
+                        customerAction(click, product.getProductImageLink());
                         LOG.info("** CASIO PDP SHOULD BE DISPLAYED **");
                         break outer;
                     }
@@ -227,23 +225,22 @@ protected WebDriver driver;
 
 //    @After
      //TO BE IMPLEMENTED TOGETHER
-    public void customerAction(String action, WebElement element, String... requiredText) throws Exception {
+    public void customerAction(ActionTypesEnum action, WebElement element, String... requiredText) throws Exception {
         switch (action) {
-            case "click" -> {
+            case click -> {
                 element.click();
             }
-            case "enterText" -> {
+            case enterText-> {
                 element.sendKeys(requiredText);
             }
-
-            case "SelectFromDropDown" -> {
+            case SelectFromDropDown -> {
                 //Select select = new Select(find(by));
                 //select.selectByVisibleText(requiredText[0]);
             }
-            case "getText" -> {
+            case getText -> {
                 //find(by).getText();
             }
-            case "getValue" -> {
+            case getValue -> {
                 //find(by).getAttribute("value");
             }
         }
