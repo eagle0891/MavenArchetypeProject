@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,5 +77,10 @@ public class WaitHelper {
             }
         }
         return isDisplayed;
+    }
+
+    public void waitForElementToBeClickable(WebDriver driver, WebElement locator, Duration timeout){
+        new WebDriverWait(driver, timeout).ignoring(StaleElementReferenceException.class)
+                .until(ExpectedConditions.elementToBeClickable(locator));
     }
 }

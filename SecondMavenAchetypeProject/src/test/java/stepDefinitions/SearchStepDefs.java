@@ -43,7 +43,7 @@ public class SearchStepDefs extends BaseClass {
     }
 
     @When("^I click on the product '(.*)'$")
-    public void selectTheProduct(String productType) throws InterruptedException {
+    public void selectTheProduct(String productType) throws Exception {
         System.out.println("Product type provided by the test is: " + productType);
         findProductType(productType);
     }

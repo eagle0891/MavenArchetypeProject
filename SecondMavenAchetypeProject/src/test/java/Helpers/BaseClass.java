@@ -186,7 +186,7 @@ protected WebDriver driver;
         return Product.ProductCollection;
     }
 
-    public void findProductType(String productType) throws InterruptedException {
+    public void findProductType(String productType) throws Exception {
         //clearProductCollectionIfPopulated();
         outer: for (Product product : Product.ProductCollection) {
             switch(productType){
@@ -195,10 +195,9 @@ protected WebDriver driver;
                         System.out.println("*** Samsung switch statement being executed ***");
                         LOG.info("** SAMSUNG PRODUCT FOUND **");
                         product.display();
-//                        waitForExpectedElement(By.cssSelector("span.a-text-normal"), Duration.ofSeconds(50)).click();
-//                        visibilityOfElementLocated(By.cssSelector("span.a-text-normal"));
-                        Thread.sleep(3000);
-                        product.getProductImageLink().click();
+                        waitForElementToBeClickable(driver, product.getProductImageLink(), Duration.ofSeconds(10));
+//                        Thread.sleep(3000);
+//                        product.getProductImageLink().click();
                         LOG.info("** SAMSUNG PDP SHOULD BE DISPLAYED **");
                         break outer;
                     }
@@ -208,10 +207,10 @@ protected WebDriver driver;
                         System.out.println("*** Casio switch statement being executed ***");
                         LOG.info("** CASIO PRODUCT FOUND **");
                         product.display();
-//                        waitForExpectedElement(By.cssSelector("span.a-text-normal"), Duration.ofSeconds(50)).click();
-//                        visibilityOfElementLocated(By.cssSelector("span.a-text-normal"));
-                        Thread.sleep(3000);
-                        product.getProductImageLink().click();
+                        waitForElementToBeClickable(driver, product.getProductImageLink(), Duration.ofSeconds(10));
+//                        Thread.sleep(3000);
+//                        product.getProductImageLink().click();
+                        customerAction("click", product.getProductImageLink());
                         LOG.info("** CASIO PDP SHOULD BE DISPLAYED **");
                         break outer;
                     }
@@ -227,27 +226,28 @@ protected WebDriver driver;
     }
 
 //    @After
-//     //TO BE IMPLEMENTED TOGETHER
-//    public void customerAction(String action,By by, String... requiredText) throws Exception {
-//        switch (action) {
-//            case "click" -> {
-//
-//            }
-//            case "enterText" -> {
-//            }
-//
-//            case "SelectFromDropDown" -> {
-//                //Select select = new Select(find(by));
-//                //select.selectByVisibleText(requiredText[0]);
-//            }
-//            case "getText" -> {
-//                //find(by).getText();
-//            }
-//            case "getValue" -> {
-//                //find(by).getAttribute("value");
-//            }
-//        }
-//    }
+     //TO BE IMPLEMENTED TOGETHER
+    public void customerAction(String action, WebElement element, String... requiredText) throws Exception {
+        switch (action) {
+            case "click" -> {
+                element.click();
+            }
+            case "enterText" -> {
+                element.sendKeys(requiredText);
+            }
+
+            case "SelectFromDropDown" -> {
+                //Select select = new Select(find(by));
+                //select.selectByVisibleText(requiredText[0]);
+            }
+            case "getText" -> {
+                //find(by).getText();
+            }
+            case "getValue" -> {
+                //find(by).getAttribute("value");
+            }
+        }
+    }
 
     //@After
     public void quit (){
