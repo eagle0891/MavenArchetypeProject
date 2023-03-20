@@ -3,7 +3,6 @@ package Helpers;
 import Models.Product;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
-import org.junit.After;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -94,30 +93,36 @@ protected WebDriver driver;
         driver.navigate().to(string);
     }
 
-    private static final By ACCEPT_TERMS_AND_CONDITIONS = By.cssSelector(ReadFrom.propertiesFile("css","acceptTermsAndConditions"));
+    private static final By AMAZON_ACCEPT_TERMS_AND_CONDITIONS = By.cssSelector(ReadFrom.propertiesFile("css","acceptTermsAndConditions"));
 
-    public void acceptCookies() {
-        driver.findElement(By.cssSelector("#sp-cc-accept")).click(); //.consent_prompt_footer #consent_prompt_submit
+    public void amazonAcceptCookies() {
+        driver.findElement(AMAZON_ACCEPT_TERMS_AND_CONDITIONS).click();
     }
 
+    private static final By AMAZON_SEARCH_FIELD = By.cssSelector(ReadFrom.propertiesFile("css", "amazonSearchField"));
+
     public void enterSearchTerm(String string){
-        driver.findElement(By.cssSelector("#twotabsearchtextbox")).sendKeys(string, Keys.RETURN); //#searchTerm
+        driver.findElement(AMAZON_SEARCH_FIELD).sendKeys(string, Keys.RETURN);
     }
 
     public void clickEnter(String selector){
         driver.findElement(By.cssSelector(selector)).click();
     }
 
+    private static final By ARGOS_PLP_PRODUCT_TITLE = By.cssSelector(ReadFrom.propertiesFile("css", "argosPlpProductTitle"));
+    private static final By ARGOS_SEARCH_RESULT_LIST = By.cssSelector(ReadFrom.propertiesFile("css", "argosSearchResultList"));
+    private static final By ARGOS_PLP_PRODUCT_TILE = By.cssSelector(ReadFrom.propertiesFile("css", "argosPlpProductTile"));
+    private static final By ARGOS_ADD_TO_CART_BUTTON = By.cssSelector(ReadFrom.propertiesFile("css", "argosAddToCartButton"));
 
     public void collectProducts(){
-        isElementDisplayed(By.cssSelector(".styles__ProductList-sc-1rzb1sn-1 .styles__LazyHydrateCard-sc-1rzb1sn-0 .ProductCardstyles__Title-h52kot-12"));
-        String css = driver.findElement(By.cssSelector(".s-result-list")).getAttribute("class");
+        isElementDisplayed(ARGOS_PLP_PRODUCT_TITLE);
+        String css = driver.findElement(ARGOS_SEARCH_RESULT_LIST).getAttribute("class");
         System.out.println("CSS is: " + css);
-        List<WebElement> products = driver.findElements(By.cssSelector(".styles__ProductList-sc-1rzb1sn-1 .styles__LazyHydrateCard-sc-1rzb1sn-0"));
+        List<WebElement> products = driver.findElements(ARGOS_PLP_PRODUCT_TILE);
         System.out.println("Number of products is: " + products.size());
         for (WebElement product : products) {
-            WebElement link = product.findElement(By.cssSelector(".ProductCardstyles__Title-h52kot-12"));
-            WebElement button = product.findElement(By.cssSelector(".Buttonstyles__Button-sc-42scm2-2"));
+            WebElement link = product.findElement(ARGOS_PLP_PRODUCT_TITLE);
+            WebElement button = product.findElement(ARGOS_ADD_TO_CART_BUTTON);
 
             String linkTextUrl = link.getAttribute("href");
             String buttonText = button.getText();
@@ -129,29 +134,13 @@ protected WebDriver driver;
 
     private static final By SEARCH_RESULTS_LIST = By.cssSelector(ReadFrom.propertiesFile("css", "searchResultsList"));
     private static final By SEARCH_RESULT_ITEM = By.cssSelector(ReadFrom.propertiesFile("css", "searchResultItem"));
-    public void collectProductsTwo() throws InterruptedException {
-        String css = driver.findElement(SEARCH_RESULTS_LIST).getAttribute("class");
-        System.out.println("Search result CSS is: " + css);
-        waitForElementToDisplay( driver.findElement(SEARCH_RESULTS_LIST), 10);
-        WebElement searchResultsList = driver.findElement(SEARCH_RESULTS_LIST);
-        //(driver.findElement(SEARCH_RESULT_ITEM).getAttribute("data-asin") != null)
-        List<WebElement> products = searchResultsList.findElements(SEARCH_RESULT_ITEM);
-        System.out.println("Number of products is: " + products.size());
-        for (WebElement product : products) {
-            if (product.findElement(By.cssSelector(".a-price-whole")).getText().length()>1) {
-                String productName = product.findElement(By.cssSelector("span.a-text-normal")).getText();
-                String productWholePricePart = product.findElement(By.cssSelector(".a-price-whole")).getText();
-                String productDecimalPricePart = product.findElement(By.cssSelector(".a-price-fraction")).getText();
-//                String productBrandName = product.findElement(By.cssSelector("h5.s-line-clamp-1 .a-size-base-plus.a-color-base")).getText();
-//                System.out.println("Brand is: " + productBrandName);
-                System.out.println("Product title is: " + productName);
-                System.out.println("Product Price is: £" + productWholePricePart + "." + productDecimalPricePart);
-            }
-//            throw new NoSuchElementException("Element does not contain a product");
-        }
-    }
+    private static final By PLP_PRODUCT_NAME = By.cssSelector(ReadFrom.propertiesFile("css", "plpProductName"));
+    private static final By PLP_PRODUCT_WHOLE_PRICE = By.cssSelector(ReadFrom.propertiesFile("css", "plpProductWholePrice"));
+    private static final By PLP_PRODUCT_DECIMAL_PRICE = By.cssSelector(ReadFrom.propertiesFile("css", "plpProductDecimalPrice"));
+    private static final By PLP_PRODUCT_IMAGE_LINK = By.cssSelector(ReadFrom.propertiesFile("css", "plpProductImageLink"));
+    private static final By PLP_PRODUCT_BRAND_NAME = By.cssSelector(ReadFrom.propertiesFile("css", "plpProductBrandName"));
 
-    public ArrayList<Product> collectProductsThree() throws InterruptedException {
+    public ArrayList<Product> getProducts() throws InterruptedException {
         Product.ProductCollection = new ArrayList<>();
         String css = driver.findElement(SEARCH_RESULTS_LIST).getAttribute("class");
         System.out.println("Search result CSS is: " + css);
@@ -161,25 +150,25 @@ protected WebDriver driver;
         System.out.println("Number of products is: " + products.size());
         for (WebElement product : products) {
             try {
-                String productName = product.findElement(By.cssSelector("span.a-text-normal")).getText();
-                String productWholePricePart = product.findElement(By.cssSelector(".a-price-whole")).getText();
-                String productDecimalPricePart = product.findElement(By.cssSelector(".a-price-fraction")).getText();
-                WebElement produtImageLink = product.findElement(By.cssSelector(".s-image"));
-                // String productBrandName = product.findElement(By.cssSelector("h5.s-line-clamp-1 .a-size-base-plus.a-color-base")).getText();
-                // System.out.println("Brand is: " + productBrandName);
+                String productName = product.findElement(PLP_PRODUCT_NAME).getText();
+                String productWholePricePart = product.findElement(PLP_PRODUCT_WHOLE_PRICE).getText();
+                String productDecimalPricePart = product.findElement(PLP_PRODUCT_DECIMAL_PRICE).getText();
+                WebElement productImageLink = product.findElement(PLP_PRODUCT_IMAGE_LINK);
+                String productBrandName = product.findElement(PLP_PRODUCT_BRAND_NAME).getText();
+                System.out.println("Brand is: " + productBrandName);
                 System.out.println("Product title is: " + productName);
                 System.out.println("Product Price is: £" + productWholePricePart + "." + productDecimalPricePart);
                 boolean isSamsung = productName.contains("Samsung");
                 WebElement samsungSelection = null;
                 if (isSamsung) {
-                    samsungSelection = product.findElement(By.cssSelector("span.a-text-normal"));
+                    samsungSelection = product.findElement(PLP_PRODUCT_NAME);
                 }
                 boolean isCasio = productName.contains("Casio");
                 WebElement casioSelection = null;
                 if (isCasio) {
-                    casioSelection = product.findElement(By.cssSelector("span.a-text-normal"));
+                    casioSelection = product.findElement(PLP_PRODUCT_NAME);
                 }
-                Product.ProductCollection.add(new Product(productName, productWholePricePart, productDecimalPricePart, isSamsung, product, samsungSelection, isCasio, casioSelection, produtImageLink));
+                Product.ProductCollection.add(new Product(productName, productWholePricePart, productDecimalPricePart, isSamsung, product, samsungSelection, isCasio, casioSelection, productImageLink));
             } catch (NoSuchElementException e) {
                 LOG.info("**** Element does not contain a product ****");
             }
@@ -197,7 +186,8 @@ protected WebDriver driver;
                         LOG.info("** SAMSUNG PRODUCT FOUND **");
                         product.display();
                         waitForElementToBeClickable(driver, product.getProductImageLink(), Duration.ofSeconds(10));
-                        customerAction(click, product.getProductImageLink());
+//                        customerAction(click, product.getProductImageLink());
+                        product.getProductImageLink().click();
                         LOG.info("** SAMSUNG PDP SHOULD BE DISPLAYED **");
                         break outer;
                     }
@@ -208,7 +198,8 @@ protected WebDriver driver;
                         LOG.info("** CASIO PRODUCT FOUND **");
                         product.display();
                         waitForElementToBeClickable(driver, product.getProductImageLink(), Duration.ofSeconds(10));
-                        customerAction(click, product.getProductImageLink());
+//                        customerAction(click, product.getProductImageLink());
+                        product.getProductImageLink().click();
                         LOG.info("** CASIO PDP SHOULD BE DISPLAYED **");
                         break outer;
                     }
@@ -219,16 +210,18 @@ protected WebDriver driver;
         }
     }
 
+    private static final By BREADCRUMB_BACK_LINK = By.cssSelector(ReadFrom.propertiesFile("css", "breadcrumbBackLink"));
+
     public void confirmPdpPageIsDisplayed(){
-        assertTrue(driver.findElement(By.cssSelector("#breadcrumb-back-link")).isDisplayed());
+        assertTrue(driver.findElement(BREADCRUMB_BACK_LINK).isDisplayed());
     }
 
 //    @After
      //TO BE IMPLEMENTED TOGETHER
-    public void customerAction(ActionTypesEnum action, WebElement element, String... requiredText) throws Exception {
+    public void customerAction(ActionTypesEnum action, WebElement element, String attributeType, String... requiredText ) throws Exception {
         switch (action) {
             case click -> {
-                element.click();
+                element.click(); //customerAction(click, product.getProductImageLink()); doesn't like this
             }
             case enterText-> {
                 element.sendKeys(requiredText);
@@ -238,10 +231,10 @@ protected WebDriver driver;
                 //select.selectByVisibleText(requiredText[0]);
             }
             case getText -> {
-                //find(by).getText();
+                element.getText();
             }
             case getValue -> {
-                //find(by).getAttribute("value");
+                element.getAttribute(attributeType); //i.e. "class","id", etc
             }
         }
     }

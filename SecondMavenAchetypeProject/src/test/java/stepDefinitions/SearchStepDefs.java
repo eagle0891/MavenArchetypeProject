@@ -22,7 +22,7 @@ public class SearchStepDefs extends BaseClass {
         System.out.println("**** Navigating to site " + websiteURL);
         openBrowser(browser);
         navigateToSite(websiteURL);
-        acceptCookies();
+        amazonAcceptCookies();
     }
 
     @When("^the user searches for a product '(.*)'$")
@@ -34,7 +34,7 @@ public class SearchStepDefs extends BaseClass {
     @Then("^the search results should be displayed$")
     public void searchResults() throws InterruptedException {
         System.out.println("**** Search results are displayed");
-        collectProductsThree();
+        getProducts();
     }
 
     @Test
