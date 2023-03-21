@@ -1,5 +1,6 @@
 package GraphQLRestAssured;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -107,6 +108,36 @@ public class FirstTest {
                             .then().log().all()
                                 .assertThat()
                                     .statusCode(200);
+
+    }
+
+    @Test
+    public void getAllAlbumsWithPojo(){
+        RestAssured.baseURI = "https://great-ladybug-56.hasura.app";
+        GraphQLPojoTestQuery query = new GraphQLPojoTestQuery();
+
+        query.setQuery("query MyQuery($limit: Int!, $title: String!) {\n" +
+                "  Album(limit: $limit, where: {Title: {_eq: $title}}) {\n" +
+                "    Title\n" +
+                "  }\n" +
+                "}");
+
+        QueryVariable variable = new QueryVariable();
+        variable.setLimit(5);
+        variable.setTitle("Balls to the Wall");
+
+        query.setVariables(variable);
+
+        given().log().all()
+                .contentType(ContentType.JSON)
+                .header("x-hasura-admin-secret", "3m1kpYOAi6QkJsjCC1qpzHe0KTd1cDVffdlkqKq3DMrFHnpXxAAtpMNym7ZNHzKk")
+                .body(query)
+                    .when()
+                        .post("/v1/graphql")
+                            .then().log().all()
+                                .assertThat()
+                                    .statusCode(200)
+                                    .and().body("data.Album[0].Title", equalTo("Balls to the Wall"));
 
     }
 }
