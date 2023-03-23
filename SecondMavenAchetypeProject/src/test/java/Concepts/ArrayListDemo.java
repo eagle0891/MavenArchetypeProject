@@ -1,13 +1,11 @@
 package Concepts;
 
+import io.netty.util.concurrent.SingleThreadEventExecutor;
 import org.codehaus.groovy.runtime.ArrayUtil;
 
 import javax.lang.model.type.ArrayType;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Objects;
+import java.util.*;
 
 public class ArrayListDemo {
 
@@ -150,9 +148,27 @@ public class ArrayListDemo {
         digits.removeIf(num -> num%2 == 0); //"->" is a lambda function //remove all even numbers
         System.out.println(digits);
 
-//        ArrayList<Integer> figures = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8,9,10));
-//        System.out.println(figures);
-//        digits.removeIf(num -> num%2+1 == 0); //"->" is a lambda function
-//        System.out.println(figures);
+        ArrayList<String> carMakes = new ArrayList<>(Arrays.asList(
+                "Ford", "Peugeot", "BMW", "Seat", "Volkswagen", "Volvo", "Ferrari", "Mini", "BMW", "Toyota"));
+        System.out.println(carMakes);
+        carMakes.retainAll(Collections.singleton("BMW"));
+        System.out.println(carMakes);
+
+        ArrayList<Integer> moreDigits = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8,9,10));
+        System.out.println();
+        ArrayList<Integer> subList = new ArrayList<>(moreDigits.subList(2,7)); //up to and not including the 7th index
+        System.out.println(subList);
+
+        ArrayList<String> trainers = new ArrayList<>(Arrays.asList(
+                "Nike", "Adidas", "Puma", "Fila", "Gola", "Converse", "Vans", "Hummel", "New Balance", "Asics"));
+        System.out.println(trainers);
+
+        Object[] arr = trainers.toArray();
+        System.out.println(Arrays.toString(arr));
+
+        for (Object o : arr) {
+            System.out.println(o);
+        }
+
     }
 }
