@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="org.example.AppTest" time="0" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="GraphQLRestAssured.FirstTest" time="18.956" tests="15" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="19.0.2+7-44"/>
@@ -60,5 +60,19 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testApp" classname="org.example.AppTest" time="0"/>
+  <testcase name="firstStarWarsTest[0]" classname="GraphQLRestAssured.FirstTest" time="5.017"/>
+  <testcase name="hasuraTestWithMultipleDataParams[0]" classname="GraphQLRestAssured.FirstTest" time="1.11"/>
+  <testcase name="firstHasuraTest[0]" classname="GraphQLRestAssured.FirstTest" time="3.627"/>
+  <testcase name="getAllAlbumsWithPojo[0]" classname="GraphQLRestAssured.FirstTest" time="0.261"/>
+  <testcase name="hasuraTestWithLimitSet[0]" classname="GraphQLRestAssured.FirstTest" time="0.994"/>
+  <testcase name="firstStarWarsTest[1]" classname="GraphQLRestAssured.FirstTest" time="0.487"/>
+  <testcase name="hasuraTestWithMultipleDataParams[1]" classname="GraphQLRestAssured.FirstTest" time="0.843"/>
+  <testcase name="firstHasuraTest[1]" classname="GraphQLRestAssured.FirstTest" time="2.234"/>
+  <testcase name="getAllAlbumsWithPojo[1]" classname="GraphQLRestAssured.FirstTest" time="0.021"/>
+  <testcase name="hasuraTestWithLimitSet[1]" classname="GraphQLRestAssured.FirstTest" time="0.354"/>
+  <testcase name="firstStarWarsTest[2]" classname="GraphQLRestAssured.FirstTest" time="0.257"/>
+  <testcase name="hasuraTestWithMultipleDataParams[2]" classname="GraphQLRestAssured.FirstTest" time="0.683"/>
+  <testcase name="firstHasuraTest[2]" classname="GraphQLRestAssured.FirstTest" time="3.05"/>
+  <testcase name="getAllAlbumsWithPojo[2]" classname="GraphQLRestAssured.FirstTest" time="0.004"/>
+  <testcase name="hasuraTestWithLimitSet[2]" classname="GraphQLRestAssured.FirstTest" time="0.013"/>
 </testsuite>

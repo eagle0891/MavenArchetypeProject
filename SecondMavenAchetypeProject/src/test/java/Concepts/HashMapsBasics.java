@@ -13,7 +13,7 @@ public class HashMapsBasics {
         HashMap is not threadsafe
         */
 
-        basicHashMap();
+//        basicHashMap();
     }
 
     public static void basicHashMap(){

@@ -1,18 +1,16 @@
 package Concepts;
 
-import io.netty.util.concurrent.SingleThreadEventExecutor;
-import org.codehaus.groovy.runtime.ArrayUtil;
-
-import javax.lang.model.type.ArrayType;
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
 
 public class ArrayListDemo {
 
     public static void main(String[] args){
-        arrayListIteration();
-        arrayListContainingCollection();
-        arrayListMethods();
+//        arrayListIteration();
+//        arrayListContainingCollection();
+//        arrayListMethods();
     }
 
     //static array
