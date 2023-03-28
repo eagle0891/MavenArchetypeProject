@@ -1,7 +1,7 @@
 Feature: API Test
 
   Scenario Outline: firstStarWarsTest
-    Given request contains '<contentType>' and '{"query":"{\n  allFilms {\n    films {\n      title\n    }\n  }\n}"}', and request is sent to '<uri>', and response returns status <statusCode> and body '<responseBody>' matches '<expectedResponse>'
+    Given request contains '<contentType>' and Star Wars films query, and request is sent to '<uri>', and response returns status <statusCode> and body '<responseBody>' matches '<expectedResponse>'
 #    When request is sent to '<uri>'
 #    Then response returns status '<statusCode>' and body '<responseBody>'
     Examples:
