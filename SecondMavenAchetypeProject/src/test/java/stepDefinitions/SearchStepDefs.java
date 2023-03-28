@@ -5,12 +5,15 @@ import Helpers.ReadFrom;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.RestAssured;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -52,4 +55,21 @@ public class SearchStepDefs extends BaseClass {
     public void pdpShouldBeDisplayed() {
         confirmPdpPageIsDisplayed();
     }
+
+//    @Given("^request contains contentType and requestBody, and request is sent to uri, and response returns status statusCode and body responseBody$")
+//    public void firstStarWarsTest() {
+//        RestAssured.baseURI = "https://swapi-graphql.netlify.app"; //main part of the URI
+//        String query = "{\"query\":\"{\\n  allFilms {\\n    films {\\n      title\\n    }\\n  }\\n}\"}"; //retrieved from Network > index request > request payload > view source
+//        String uri = "/.netlify/functions/index";
+//
+//        given().log().all()
+//                .contentType("application/json")
+//                .body(query)
+//                .when().log().all()
+//                .post(uri)
+//                .then().log().all()
+//                .assertThat()
+//                .statusCode(200)
+//                .body("data.allFilms.films[0].title", equalTo("A New Hope"));
+//    }
 }
