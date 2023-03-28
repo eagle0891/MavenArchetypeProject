@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import GraphQLRestAssured.GQLCalls.GQLCalls;
 import Helpers.BaseClass;
 import Helpers.ReadFrom;
 import io.cucumber.java.en.Given;
@@ -16,6 +17,7 @@ import static org.junit.Assert.assertTrue;
 
 
 public class SearchStepDefs extends BaseClass {
+
     private static final Logger LOG = LoggerFactory.getLogger(BaseClass.class);
     @Given("^the user is on the website '(.*)' using '(.*)'$")
     public void navigateToWebsite(String websiteURL, String browser) throws MalformedURLException {

@@ -1,4 +1,6 @@
 package GraphQLRestAssured;
+import GraphQLRestAssured.GQLCalls.GQLCalls;
+import io.cucumber.java.en.Given;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.Test;
@@ -16,30 +18,34 @@ public class FirstTest {
 
     private final String limit;
     private final String albumName;
+    GQLCalls gqlCalls;
 
-    public FirstTest(String limit, String albumName) {
+    public FirstTest(String limit, String albumName, GQLCalls gqlCalls) {
         this.limit = limit;
         this.albumName = albumName;
+        this.gqlCalls = gqlCalls;
     }
 
-    @Test
-    public void firstStarWarsTest(){
-        //https://swapi-graphql.netlify.app/.netlify/functions/index //retrieved via Network > index request > Request URL
-
-        RestAssured.baseURI = "https://swapi-graphql.netlify.app"; //main part of the URI
-        String query = "{\"query\":\"{\\n  allFilms {\\n    films {\\n      title\\n    }\\n  }\\n}\"}"; //retrieved from Network > index request > request payload > view source
-        String uri = "/.netlify/functions/index";
-
-        given().log().all()
-                .contentType("application/json")
-                .body(query)
-                    .when().log().all()
-                        .post(uri)
-                            .then().log().all()
-                                .assertThat()
-                                    .statusCode(200)
-                                    .body("data.allFilms.films[0].title", equalTo("A New Hope"));
-    }
+//    @Test
+//    @Given("^request contains '(.*)' and '(.*)', and request is sent to '(.*)', and response returns status '(\\d+)' and body '(.*)'$")
+//    public void firstStarWarsTest(String contentType, String query, String uri, Integer statusCode, String responseBody){
+//        //https://swapi-graphql.netlify.app/.netlify/functions/index //retrieved via Network > index request > Request URL
+//
+////        RestAssured.baseURI = "https://swapi-graphql.netlify.app"; //main part of the URI
+////        String query = "{\"query\":\"{\\n  allFilms {\\n    films {\\n      title\\n    }\\n  }\\n}\"}"; //retrieved from Network > index request > request payload > view source
+////        String uri = "/.netlify/functions/index";
+////
+////        given().log().all()
+////                .contentType("application/json")
+////                .body(query)
+////                    .when().log().all()
+////                        .post(uri)
+////                            .then().log().all()
+////                                .assertThat()
+////                                    .statusCode(200)
+////                                    .body("data.allFilms.films[0].title", equalTo("A New Hope"));
+//        gqlCalls.firstStarWarsTestCall(contentType, query, uri, statusCode, responseBody);
+//    }
 
     @Test
     public void firstHasuraTest(){
