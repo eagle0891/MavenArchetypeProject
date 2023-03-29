@@ -34,4 +34,16 @@ public String loggedResponses;
         consoleLogger.printMessageToConsole(loggedResponses);
     }
 
+
+    @Given("^request contains '(.*)', '(.*)', '(.*)', '(.*)', and request is sent to '(.*)', and response returns status '(.*)' and body '(.*)' matches '(.*)'$")
+    public void firstHasuraTest(String contentType, String headerTitle, String headerValue, String requestModuleToTest, String uri, Integer statusCode, String responseBody, Integer expectedResponse) {
+        jsonResponse = GraphQLModule.returnHasuraAPIResponseForAssertion(contentType, headerTitle, headerValue, requestModuleToTest, uri, statusCode, responseBody, expectedResponse).extract().jsonPath().prettify();
+        jsonPath = new JsonPath(jsonResponse);
+
+        for (String dataField : GraphQLDataFields.returnModuleArray(requestModuleToTest)) {
+            assertTrue("ERROR : data Field not matched : " + dataField,jsonResponse.contains(dataField));
+            consoleLogger.API_Response_Data_Logger(requestModuleToTest, jsonPath, dataField, this);
+        }
+        consoleLogger.printMessageToConsole(loggedResponses);
+    }
 }

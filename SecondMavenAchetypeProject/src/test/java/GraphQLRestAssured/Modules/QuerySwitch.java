@@ -8,8 +8,10 @@ public class QuerySwitch extends ModuleConfigQueries {
         switch (requestModuleToTest) {
             case "allStarWarsFilmsQuery":
                 return ModuleConfigQueries.returnModuleConfigAllStarWarsFilmsQuery();
+            case "albumsListQuery":
+                return ModuleConfigQueries.returnModuleConfigAlbumsListQuery();
             default:
-                System.out.println("Incorrect Module Query Type selected - please ensure expected and valid query injected");
+                System.out.println("***** INCORRECT MODULE QUERY PASSED FROM SCENARIO *****: Request query passed from scenario = \"" + requestModuleToTest + "\" - ensure expected and valid request query is injected");
                 return null;
         }
     }
