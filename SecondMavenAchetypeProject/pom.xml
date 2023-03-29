@@ -95,6 +95,13 @@
       <version>1.18.26</version>
       <scope>provided</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-util -->
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-util</artifactId>
+      <version>11.0.14</version>
+    </dependency>
+
   </dependencies>
   <build>
     <plugins>

@@ -4,7 +4,7 @@ public class ModuleConfigQueries {
 
      static String allStarWarsFilmsQuery;
 
-     public static String returnModuleConfigQueryAllStarWarsFilms(){
+     public static String returnModuleConfigAllStarWarsFilmsQuery(){
          return allStarWarsFilmsQuery = "{\"query\":\"{\\n  allFilms {\\n    films {\\n      title\\n    }\\n  }\\n}\"}";
      }
 
