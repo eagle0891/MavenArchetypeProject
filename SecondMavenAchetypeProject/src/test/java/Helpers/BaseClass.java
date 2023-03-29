@@ -32,7 +32,7 @@ public class BaseClass extends WaitHelper {
 //        this.waitHelper = waitHelper;
 //    }
 protected WebDriver driver;
-    protected static final Logger LOG = LoggerFactory.getLogger(BaseClass.class);
+    public static final Logger LOG = LoggerFactory.getLogger(BaseClass.class);
     @Getter
     protected WebDriverWait wait;
 //    @Getter
