@@ -40,4 +40,21 @@ public class GraphQLModule {
         return response;
     }
 
+    public static final  ValidatableResponse returnHasuraAPIResponseForAssertion(String contentType, String headerTitle, String headerValue, String requestModuleToTest, String uri, Integer statusCode, String responseBody, Integer expectedResponse) {
+        RestAssured.baseURI = "https://great-ladybug-56.hasura.app";
+
+        response = given().log().all()
+                .contentType(contentType)
+                .header(headerTitle,headerValue)
+                .body(QuerySwitch.getRequestModuleQuery(requestModuleToTest))
+                .when().log().all()
+                .post(uri)
+                .then().log().all()
+                .assertThat()
+                .statusCode(statusCode)
+                .body(responseBody, equalTo(expectedResponse));
+//                .body("data.Album.Tracks[0].Name[0]", equalTo("For Those About To Rock (We Salute You)"));
+        return response;
+    }
+
 }

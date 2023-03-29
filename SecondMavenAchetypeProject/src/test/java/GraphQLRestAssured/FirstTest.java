@@ -11,7 +11,7 @@ import java.util.Collection;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-@RunWith(Parameterized.class)
+//@RunWith(Parameterized.class)
 public class FirstTest {
 
     private final String limit;
@@ -61,13 +61,13 @@ public class FirstTest {
 
     }
 
-    @Parameterized.Parameters
-    public static Collection<Object[]> getQueryData(){
-        return Arrays.asList(new Object[][]{
-                {"3", "Restless and Wild"},
-                {"2", "Restless and Wild"},
-                {"4", "Restless and Wild"}});
-    }
+//    @Parameterized.Parameters
+//    public static Collection<Object[]> getQueryData(){
+//        return Arrays.asList(new Object[][]{
+//                {"3", "Restless and Wild"},
+//                {"2", "Restless and Wild"},
+//                {"4", "Restless and Wild"}});
+//    }
 
     @Test
     //Test is run using the Junit "parameterized" data approach
