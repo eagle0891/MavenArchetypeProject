@@ -4,8 +4,8 @@ import GraphQLRestAssured.POJO.ModuleConfigQueries;
 
 public class QuerySwitch extends ModuleConfigQueries {
 
-    static String getModuleQuery(String moduleQuery, String... injectorValues) {
-        switch (moduleQuery) {
+    static String getRequestModuleQuery(String requestModuleToTest, String... injectorValues) {
+        switch (requestModuleToTest) {
             case "allStarWarsFilmsQuery":
                 return ModuleConfigQueries.returnModuleConfigAllStarWarsFilmsQuery();
             default:
