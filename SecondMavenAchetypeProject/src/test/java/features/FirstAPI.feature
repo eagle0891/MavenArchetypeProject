@@ -18,3 +18,9 @@ Feature: API Test
     Examples:
       | contentType      | headerTitle           | headerValue                                                      | requestBody     | uri         | statusCode | responseBody                    | expectedResponse |
       | application/json | x-hasura-admin-secret | 3m1kpYOAi6QkJsjCC1qpzHe0KTd1cDVffdlkqKq3DMrFHnpXxAAtpMNym7ZNHzKk | albumsListQuery | /v1/graphql | 200        | data.Album.Tracks[0].TrackId[0] | 1                |
+
+  Scenario Outline: HasuraEmployeeTest
+    Given Hasura employee request contains '<contentType>', '<headerTitle>', '<headerValue>', '<requestBody>', and request is sent to '<uri>', and response returns status '<statusCode>' and body '<responseBody>' matches '<expectedResponse>'
+    Examples:
+      | contentType      | headerTitle           | headerValue                                                      | requestBody       | uri         | statusCode | responseBody        | expectedResponse      |
+      | application/json | x-hasura-admin-secret | 3m1kpYOAi6QkJsjCC1qpzHe0KTd1cDVffdlkqKq3DMrFHnpXxAAtpMNym7ZNHzKk | employeeListQuery | /v1/graphql | 200        | data.Employee.Email[0] | nancy@chinookcorp.com |

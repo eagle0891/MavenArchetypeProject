@@ -18,7 +18,7 @@ public class ConsoleLogger {
     public void API_Response_Data_Logger(String requestModuleToTest, JsonPath jsonPath, String dataField, APIStepsDefs apiStepsDefs) {
         switch (requestModuleToTest) {
 
-            case "allStarWarsFilmsQuery":
+            case "allStarWarsFilmsQuery", "albumsListQuery", "employeeListQuery":
                 if (!dataField.equals("data") && !dataField.equals("moduleConfig")) {
                     apiStepsDefs.loggedResponses += ("\nKEY:[" + dataField.toUpperCase() + "] VALUE:[" + jsonPath.getString("data.moduleConfig." + dataField) + "]");
                 }
