@@ -2,7 +2,9 @@ package GraphQLRestAssured.Modules;
 
 import Helpers.ReadFrom;
 import io.restassured.RestAssured;
+import io.restassured.internal.assertion.BodyMatcher;
 import io.restassured.response.ValidatableResponse;
+import org.hamcrest.Matcher;
 
 import static GraphQLRestAssured.POJO.ModuleConfigQueries.*;
 import static io.restassured.RestAssured.given;
@@ -54,6 +56,25 @@ public class GraphQLModule {
                 .statusCode(statusCode)
                 .body(responseBody, equalTo(expectedResponse));
 //                .body("data.Album.Tracks[0].Name[0]", equalTo("For Those About To Rock (We Salute You)"));
+
+        return response;
+    }
+
+    public static final  ValidatableResponse returnHasuraStringAPIResponseForAssertion(String contentType, String headerTitle, String headerValue, String requestModuleToTest, String uri, Integer statusCode, String responseBody, String expectedResponse) {
+        RestAssured.baseURI = "https://great-ladybug-56.hasura.app";
+
+        response = given().log().all()
+                .contentType(contentType)
+                .header(headerTitle,headerValue)
+                .body(QuerySwitch.getRequestModuleQuery(requestModuleToTest))
+                .when().log().all()
+                .post(uri)
+                .then().log().all()
+                .assertThat()
+                .statusCode(statusCode)
+                .body(responseBody, equalTo(expectedResponse));
+//                .body("data.Album.Tracks[0].Name[0]", equalTo("For Those About To Rock (We Salute You)"));
+
         return response;
     }
 
