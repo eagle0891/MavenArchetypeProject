@@ -97,11 +97,10 @@
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-util -->
     <dependency>
-      <groupId>org.eclipse.jetty</groupId>
-      <artifactId>jetty-util</artifactId>
-      <version>11.0.14</version>
+      <groupId>com.github.javafaker</groupId>
+      <artifactId>javafaker</artifactId>
+      <version>1.0.2</version>
     </dependency>
-
   </dependencies>
   <build>
     <plugins>

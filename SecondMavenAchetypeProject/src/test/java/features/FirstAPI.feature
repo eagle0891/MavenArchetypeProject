@@ -22,5 +22,9 @@ Feature: API Test
   Scenario Outline: HasuraEmployeeTest
     Given Hasura employee request contains '<contentType>', '<headerTitle>', '<headerValue>', '<requestBody>', and request is sent to '<uri>', and response returns status '<statusCode>' and body '<responseBody>' matches '<expectedResponse>'
     Examples:
-      | contentType      | headerTitle           | headerValue                                                      | requestBody       | uri         | statusCode | responseBody        | expectedResponse      |
-      | application/json | x-hasura-admin-secret | 3m1kpYOAi6QkJsjCC1qpzHe0KTd1cDVffdlkqKq3DMrFHnpXxAAtpMNym7ZNHzKk | employeeListQuery | /v1/graphql | 200        | data.Employee.Email[0] | nancy@chinookcorp.com |
+      | contentType      | headerTitle           | headerValue                                                      | requestBody       | uri         | statusCode | responseBody               | expectedResponse      |
+#      | application/json | x-hasura-admin-secret | 3m1kpYOAi6QkJsjCC1qpzHe0KTd1cDVffdlkqKq3DMrFHnpXxAAtpMNym7ZNHzKk | employeeListQuery | /v1/graphql | 200        | data.Employee.Address[0]   | 825 8 Ave SW          |
+#      | application/json | x-hasura-admin-secret | 3m1kpYOAi6QkJsjCC1qpzHe0KTd1cDVffdlkqKq3DMrFHnpXxAAtpMNym7ZNHzKk | employeeListQuery | /v1/graphql | 200        | data.Employee.BirthDate[0] | 1958-12-08T00:00:00   |
+#      | application/json | x-hasura-admin-secret | 3m1kpYOAi6QkJsjCC1qpzHe0KTd1cDVffdlkqKq3DMrFHnpXxAAtpMNym7ZNHzKk | employeeListQuery | /v1/graphql | 200        | data.Employee.City[0]      | Calgary               |
+#      | application/json | x-hasura-admin-secret | 3m1kpYOAi6QkJsjCC1qpzHe0KTd1cDVffdlkqKq3DMrFHnpXxAAtpMNym7ZNHzKk | employeeListQuery | /v1/graphql | 200        | data.Employee.Country[0]   | Canada                |
+      | application/json | x-hasura-admin-secret | 3m1kpYOAi6QkJsjCC1qpzHe0KTd1cDVffdlkqKq3DMrFHnpXxAAtpMNym7ZNHzKk | employeeListQuery | /v1/graphql | 200        | data.Employee.Email[0]     | nancy@chinookcorp.com |

@@ -27,4 +27,12 @@ public class ConsoleLogger {
                 printMessageToConsole("**** ERROR::["+requestModuleToTest+"] Incorrect / invalid Module Query Type selected for API_Response_Data_Logger method, please check setup.");
         }
     }
+
+    public void returnCustomerDetails(String lastName, String surName, String eMail, String dob){
+        LOG.info("\n**** Customer Creation Details ****\n" +
+                "\n**** Customer FirstName:[" + lastName+"]"+
+                "\n**** Customer SurName  :[" + surName +"]"+
+                "\n**** Customer Email    :[" + eMail +"]"+
+                "\n**** Customer DOB      :[" + dob+"]");
+    }
 }

@@ -49,7 +49,7 @@ public String loggedResponses;
 
     @Given("^Hasura employee request contains '(.*)', '(.*)', '(.*)', '(.*)', and request is sent to '(.*)', and response returns status '(.*)' and body '(.*)' matches '(.*)'$")
     public void hasuraEmployeeTest(String contentType, String headerTitle, String headerValue, String requestModuleToTest, String uri, Integer statusCode, String responseBody, String expectedResponse) {
-        jsonResponse = GraphQLModule.returnHasuraStringAPIResponseForAssertion(contentType, headerTitle, headerValue, requestModuleToTest, uri, statusCode, responseBody, expectedResponse).extract().jsonPath().prettify();
+        jsonResponse = GraphQLModule.returnHasuraEmployeeAPIResponseForAssertion(contentType, headerTitle, headerValue, requestModuleToTest, uri, statusCode, responseBody, expectedResponse).extract().jsonPath().prettify();
         jsonPath = new JsonPath(jsonResponse);
 
         for (String dataField : GraphQLDataFields.returnModuleArray(requestModuleToTest)) {
